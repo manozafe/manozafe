@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>salve gatinha 😘</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #FFB6C1, #FFE4E1);
+            font-family: Arial, sans-serif;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #FF69B4;
+        }
+
+        .button {
+            background: #FF69B4;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 18px;
+            cursor: pointer;
+            margin: 10px;
+            transition: transform 0.3s;
+        }
+
+        .button:hover {
+            transform: scale(1.05);
+        }
+
+        #noButton {
+            position: absolute;
+            transition: all 0.2s;
+        }
+
+        .message {
+            font-size: 20px;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .gif-container {
+            margin: 20px 0;
+            display: none;
+        }
+
+        .gif-container img {
+            max-width: 300px;
+            border-radius: 10px;
+        }
+
+        .question {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="initialContent">
+            <h1 class="title">oi mb</h1>
+            <p class="question">Você é a pessoa mais incrinvel do mundo?</p>
+            <button class="button" onclick="showMessage('por isso deve me namorar, eu que sou incrivel 😘')">acho que nao ...</button>
+            <button class="button" id="noButton" onmouseover="moveButton()">sim</button>
+        </div>
+
+        <div id="messageContent" style="display: none;">
+            <p class="message" id="message"></p>
+            <div class="gif-container" id="gifContainer"></div>
+            <button class="button" onclick="nextStep()">Continuar</button>
+        </div>
+
+        <div id="finalContent" style="display: none;">
+            <h2>Motivos para a gnt namorar:</h2>
+            <p id="reasons" style="font-size: 18px; margin: 20px 0;"></p>
+            <button class="button" onclick="showLove()">tmjjj</button>
+        </div>
+    </div>
+
+    <!-- Player de música -->
+    <audio id="backgroundMusic" loop>
+        <source src="musica.mp3" type="audio/mp3">
+        Seu navegador não suporta o player de áudio.
+    </audio>
+
+    <script>
+        const funnyReasons = [
+            "Você ri das minhas piadas ruins (mesmo quando não tem graça)",
+            "Você me ama, so n sabe ainda",
+            "Você é mais bonita que o cristiano ronaldo e um copo bem bem gelado com licor 43",
+            "Seu sorriso é mais brilhante que celular no máximo brilho às 3 da manhã",
+            "Você é mais louca que paciente do caps, combina comigo!"
+        ];
+
+        let currentStep = 0;
+
+        function moveButton() {
+            const button = document.getElementById('noButton');
+            button.style.position = 'absolute';
+            button.style.left = Math.random() * (window.innerWidth - 200) + 'px';
+            button.style.top = Math.random() * (window.innerHeight - 50) + 'px';
+        }
+
+        function showMessage(text) {
+            document.getElementById('initialContent').style.display = 'none';
+            document.getElementById('messageContent').style.display = 'block';
+            document.getElementById('message').style.display = 'block';
+            document.getElementById('message').textContent = text;
+            document.getElementById('gifContainer').style.display = 'block';
+
+            // Toca a música
+            const music = document.getElementById('backgroundMusic');
+            music.currentTime = 30; // Começa do refrão (em segundos)
+            music.play();
+        }
+
+        function nextStep() {
+            document.getElementById('messageContent').style.display = 'none';
+            document.getElementById('finalContent').style.display = 'block';
+            showReasons();
+        }
+
+        function showReasons() {
+            let text = "";
+            funnyReasons.forEach((reason, index) => {
+                text += `${index + 1}. ${reason}\n`;
+            });
+            document.getElementById('reasons').innerText = text;
+        }
+
+        function showLove() {
+            alert('BEIJO BEIJO BEIJO! 😘💕\n\nPS: voce é a bailarina mais linda que eu ja vi!');
+        }
+    </script>
+</body>
+</html>
+
